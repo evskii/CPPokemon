@@ -1,4 +1,4 @@
-# Install script for directory: C:/Users/evski/Documents/TUD Games Design/Year 3/Own Projects/C++/Pokemon
+# Install script for directory: C:/Users/evski/Documents/TUD Games Design/Year 3/Own Projects/C++/CPPokemon
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -45,5 +45,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "C:/Users/evski/Documents/TUD Games Design/Year 3/Own Projects/C++/Pokemon/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "C:/Users/evski/Documents/TUD Games Design/Year 3/Own Projects/C++/CPPokemon/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")
