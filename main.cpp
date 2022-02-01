@@ -34,7 +34,7 @@ void InitGame(){
 
     myCurrent = rand() % allPokemon.size();
     std::cout << "Total Pokemon: " << allPokemon.size() << "\n";
-    std::cout << "Your current Pokemon is: \n";
+    std::cout << "Your current Pokemon: \n";
     allPokemon[myCurrent].PrintInfo();
 
     Battle();
