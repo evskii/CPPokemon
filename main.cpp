@@ -36,18 +36,46 @@ void InitGame(){
     std::cout << "Total Pokemon: " << allPokemon.size() << "\n";
     std::cout << "Your current Pokemon is: \n";
     allPokemon[myCurrent].PrintInfo();
+
+    Battle();
 }
 
 void Battle(){
     //Get the enemy pokemon
-
+    if(enemyCurrent == 0){
+        enemyCurrent = rand() % allPokemon.size();
+    }
     //Say who is fighting who
+    std::cout << "Enemy pokemon is:\n";
+    allPokemon[enemyCurrent].PrintInfo();
 
     //Say do you want to attack or defend
+    int attackChoice = 0;
+    std::cout << "Do you want to [1] Attack or [2] Defend?: ";
+    std::cin >> attackChoice;
+    while (attackChoice != 1 && attackChoice != 2){
+        std::cout << "\nPlease type either 1 or 2: ";
+        std::cin >> attackChoice;
+    }
 
     //Compare stats
-
-    //Evaluate HP/Winner
-
-    //Say results
+    if(attackChoice == 1){ //Attacking
+        double myAtk = allPokemon[myCurrent].GetAttack();
+        double enemyDef = allPokemon[enemyCurrent].GetDefense();
+        std::cout << "\n" << allPokemon[myCurrent].GetName() << " is attacking " << allPokemon[enemyCurrent].GetName() << " with " << myAtk << " attack!\n";
+        if(myAtk > enemyDef){
+            std::cout << "You beat " << allPokemon[enemyCurrent].GetName() << "!";
+        }else{
+            std::cout << "You lost to " << allPokemon[enemyCurrent].GetName() << "!";
+        }
+    }else{ //Defending
+        double myDef = allPokemon[myCurrent].GetDefense();
+        double enemyAtk = allPokemon[enemyCurrent].GetAttack();
+        std::cout << "\n" << allPokemon[myCurrent].GetName() << " is defending against " << allPokemon[enemyCurrent].GetName() << " with " << allPokemon[myCurrent].GetDefense() << " attack!\n";
+        if(enemyAtk > myDef){
+            std::cout << "You lost to " << allPokemon[enemyCurrent].GetName() << "!";
+        }else{
+            std::cout << "You beat " << allPokemon[enemyCurrent].GetName() << "!";
+        }
+    }
 }
