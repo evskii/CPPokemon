@@ -11,47 +11,50 @@ using namespace std;
 
 enum Type{
     None = 0,
-    Bug,
-    Dark,
-    Dragon,
-    Electric,
-    Fairy,
-    Fighting,
-    Fire,
-    Flying,
-    Ghost,
-    Grass,
-    Ground,
-    Ice,
     Normal,
+    Fire,
+    Water,
+    Electric,
+    Grass,
+    Ice,
+    Fighting,
     Poison,
+    Ground,
+    Flying,
     Psychic,
+    Bug,
     Rock,
+    Ghost,
+    Dragon,
+    Dark,
     Steel,
-    Water
+    Fairy
 };
 
 vector<string> typeStrings{
         "None",
-        "Bug",
-        "Dark",
-        "Dragon",
-        "Electric",
-        "Fairy",
-        "Fighting",
-        "Fire",
-        "Flying",
-        "Ghost",
-        "Grass",
-        "Ground",
-        "Ice",
         "Normal",
+        "Fire",
+        "Water",
+        "Electric",
+        "Grass",
+        "Ice",
+        "Fighting",
         "Poison",
+        "Ground",
+        "Flying",
         "Psychic",
+        "Bug",
         "Rock",
+        "Ghost",
+        "Dragon",
+        "Dark",
         "Steel",
-        "Water"
+        "Fairy"
 };
+
+double typeAdvantages[19][19];
+
 
 class Pokemon {
     string name;
@@ -109,4 +112,28 @@ public:
         std::cout << "Speed:" << speed << "\n";
         std::cout << "---------------------------------------\n";
     }
+
+    int GetNumber(){
+        return number;
+    }
+
+    vector<string> GetTypeName(){
+        return vector<string>{typeStrings[type1], typeStrings[type2]};
+    }
+
+    vector<Type> GetTypeEnum(){
+        return vector<Type>{type1, type2};
+    }
 };
+
+Pokemon GetByNum(int num, vector<Pokemon> list){
+    for(int i = 0; i < list.size(); i++){
+        if(list[i].GetNumber() == num){
+            return list[i];
+        }
+    }
+}
+
+double GetTypeMulti(Type attacking, Type defending){
+    return typeAdvantages[attacking][defending];
+}

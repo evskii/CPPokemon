@@ -31,3 +31,11 @@ int StringToInt(string toConvert){
     ss >> toReturn;
     return toReturn;
 }
+
+double StringToDoub(string toConvert){
+    double toReturn;
+    stringstream ss;
+    ss << toConvert;
+    ss >> toReturn;
+    return toReturn;
+}
