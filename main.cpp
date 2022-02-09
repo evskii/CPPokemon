@@ -20,11 +20,12 @@ int main() {
 
     InitGameData();
 
-    cout << "Fire vs Fire: " << GetTypeMulti(Fire, Fire);
-    //int pokeNum;
-    //cout << "What Pokemon do you want to see! \n";
-    //cin >> pokeNum;
-    //GetByNum(pokeNum, allPokemon).PrintInfo();
+    //cout << "Fire vs Fire: " << GetTypeMulti(Fire, Fire);
+
+    int pokeNum;
+    cout << "What Pokemon do you want to see! \n";
+    cin >> pokeNum;
+    GetByNum(pokeNum, allPokemon).PrintInfo();
 }
 
 void InitGameData(){

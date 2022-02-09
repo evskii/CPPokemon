@@ -95,7 +95,9 @@ public:
             if(t1 == typeStrings[i]){
                 type1 = Type(i);
             }
-            if(t2 == typeStrings[i]){
+            if(t2 == "" || t2 == " "){
+                type2 = None;
+            }else if(t2 == typeStrings[i]){
                 type2 = Type(i);
             }
         }
