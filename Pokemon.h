@@ -119,12 +119,28 @@ public:
         return number;
     }
 
+    string GetName(){
+        return name;
+    }
+
     vector<string> GetTypeName(){
         return vector<string>{typeStrings[type1], typeStrings[type2]};
     }
 
     vector<Type> GetTypeEnum(){
         return vector<Type>{type1, type2};
+    }
+
+    int GetSpeed(){
+        return speed;
+    }
+
+    int GetAttack(){
+        return attack;
+    }
+
+    int GetDefense(){
+        return defense;
     }
 };
 
@@ -138,4 +154,12 @@ Pokemon GetByNum(int num, vector<Pokemon> list){
 
 double GetTypeMulti(Type attacking, Type defending){
     return typeAdvantages[attacking][defending];
+}
+
+Pokemon DetermineWinner(Pokemon attacker, Pokemon defender){
+
+}
+
+bool CheckWin(Pokemon attacker, Pokemon defender){
+    return (attacker.GetAttack() * GetTypeMulti(attacker.GetTypeEnum()[0], defender.GetTypeEnum()[0])) > defender.GetDefense();
 }

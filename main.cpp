@@ -2,6 +2,7 @@
 #include <iostream>
 #include <vector>
 #include <fstream>
+#include <cstdlib>
 
 //Headers
 #include "Pokemon.h"
@@ -11,6 +12,8 @@ using namespace std;
 
 //Methods declaration
 void InitGameData();
+void Battle(int battleType);
+void DisplayBattleInfo(Pokemon player, Pokemon enemy);
 
 //Variables
 vector<Pokemon> allPokemon; //Vector of all Pokemon in the game
@@ -20,12 +23,14 @@ int main() {
 
     InitGameData();
 
+    Battle(1);
+
     //cout << "Fire vs Fire: " << GetTypeMulti(Fire, Fire);
 
-    int pokeNum;
-    cout << "What Pokemon do you want to see! \n";
-    cin >> pokeNum;
-    GetByNum(pokeNum, allPokemon).PrintInfo();
+//    int pokeNum;
+//    cout << "What Pokemon do you want to see! \n";
+//    cin >> pokeNum;
+//    GetByNum(pokeNum, allPokemon).PrintInfo();
 }
 
 void InitGameData(){
@@ -68,13 +73,64 @@ void InitGameData(){
                 }
                 y++;
             }else{
-                cout << "Removed 1st line\n";
+//                cout << "Removed 1st line\n";
             }
         }
     }else{
         cout << "Could not find/load: " << typeFilename << "\n";
     }
     typeFile.close();
-
-
 }
+
+void Battle(int battleType){
+    bool playerWins;
+    switch (battleType) {
+        case 1: //Battle Type 1 is the basic Attack v Defend battle
+            cout << "\n You are taking part in the Basic Battle! \n";
+            cout << "-----------------------------------------------\n";
+
+            //Set the player and enemy Pokemon
+            cout << "Type the number of which Pokemon you want to use: ";
+            int playerChoice;
+            cin >> playerChoice;
+            Pokemon playerPokemon = GetByNum(playerChoice, allPokemon);
+
+            srand((unsigned) time(0));
+            Pokemon enemyPokemon = GetByNum(rand()%allPokemon.size(), allPokemon);
+
+
+            DisplayBattleInfo(playerPokemon, enemyPokemon);
+
+            //compare speeds to see who goes first
+            bool goesFirst = playerPokemon.GetSpeed() > enemyPokemon.GetSpeed();
+            if(goesFirst){
+                //Give the player 2 options
+                playerWins = CheckWin(playerPokemon, enemyPokemon);
+            }else{
+                bool attack = 0 + (rand() % (1 - 0 + 1)) == 1;
+                bool outcome;
+                outcome = attack ? CheckWin(enemyPokemon, playerPokemon) : !CheckWin(playerPokemon, enemyPokemon);
+                playerWins = !outcome;
+            }
+
+            if(playerWins){
+                cout << "You win!";
+            }else{
+                cout << "You lose!";
+            }
+
+            break;
+    }
+}
+
+void DisplayBattleInfo(Pokemon player, Pokemon enemy){
+    cout << "\n--------Current Battle--------\n";
+    cout << "Player Pokemon = #" << player.GetNumber() << " " << player.GetName() << "\n";
+    cout << "Enemy Pokemon = #" << enemy.GetNumber() << " " << enemy.GetName() << "\n";
+    cout << "------------------------------\n";
+}
+
+
+
+
+
