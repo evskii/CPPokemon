@@ -23,14 +23,7 @@ int main() {
 
     InitGameData();
 
-    Battle(1);
-
-    //cout << "Fire vs Fire: " << GetTypeMulti(Fire, Fire);
-
-//    int pokeNum;
-//    cout << "What Pokemon do you want to see! \n";
-//    cin >> pokeNum;
-//    GetByNum(pokeNum, allPokemon).PrintInfo();
+    Battle(2);
 }
 
 void InitGameData(){
@@ -85,7 +78,7 @@ void InitGameData(){
 void Battle(int battleType){
     bool playerWins;
     switch (battleType) {
-        case 1: //Battle Type 1 is the basic Attack v Defend battle
+        case 1:{ //Battle Type 1 is the basic Attack v Defend battle
             cout << "\n You are taking part in the Basic Battle! \n";
             cout << "-----------------------------------------------\n";
 
@@ -120,6 +113,55 @@ void Battle(int battleType){
             }
 
             break;
+        }
+        case 2:{ //Battle 2 allows the player to make choice to either attack or defend
+            cout << "\n You are taking part in the Not-So Basic Battle! \n";
+            cout << "-----------------------------------------------\n";
+
+            //Set the player and enemy Pokemon
+            cout << "Type the number of which Pokemon you want to use: ";
+            int playerChoice;
+            cin >> playerChoice;
+            Pokemon playerPokemon = GetByNum(playerChoice, allPokemon);
+
+            srand((unsigned) time(0));
+            Pokemon enemyPokemon = GetByNum(rand()%allPokemon.size(), allPokemon);
+
+
+            DisplayBattleInfo(playerPokemon, enemyPokemon);
+
+            //compare speeds to see who goes first
+            bool goesFirst = playerPokemon.GetSpeed() > enemyPokemon.GetSpeed();
+            if(goesFirst){
+                //Give the player options to attack or defend
+                cout << "Would you like to either [1] Attack or [2] Defend: ";
+                int choice;
+                cin >> choice;
+                switch(choice){
+                    case 1:{ //Attack
+                        playerWins = CheckWin(playerPokemon, enemyPokemon);
+                        break;
+                    }
+                    case 2: { //Defend
+                        playerWins = !CheckWin(enemyPokemon, playerPokemon);
+                        break;
+                    }
+                }
+            }else{
+                bool attack = 0 + (rand() % (1 - 0 + 1)) == 1;
+                bool outcome;
+                outcome = attack ? CheckWin(enemyPokemon, playerPokemon) : !CheckWin(playerPokemon, enemyPokemon);
+                playerWins = !outcome;
+            }
+
+            if(playerWins){
+                cout << "You win!";
+            }else{
+                cout << "You lose!";
+            }
+
+            break;
+        }
     }
 }
 
